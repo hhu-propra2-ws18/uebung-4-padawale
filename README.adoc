@@ -1,0 +1,55 @@
+= Softwareentwicklung im Team: Übung 4
+15.11.2018
+:icons: font
+:icon-set: octicon
+
+== GitHub Classroom
+
+Den Classroom für diese Übung finden Sie hier:
+
+https://classroom.github.com/g/pV2Ba1Q2
+
+Bilden Sie Teams zwischen 2 - 4 Personen und arbeiten Sie zusammen an dieser
+Aufgabe.
+
+=== Datenbank
+
+Sie können das Datenbank-Image aus Übung 3 wiederverwenden:
+
+* `docker pull propra/kunden-db`
+* `docker run -p 3306:3306 propra/kunden-db`
+
+== Aufgabenstellung
+
+Schauen Sie sich den Code aus dem oben genannten Repository an und erweitern Sie ihn um die folgenden Funktionen.
+
+=== Autos
+
+Fügen Sie eine neue Entität Auto (Feldnamen in Klammern) mit den Eigenschaften
+ID (`id`), Marke (`marke`), Farbe (`farbe`), Hubraum (`hubraum`) hinzu.
+
+. Jeder Kunde kann `n` Autos (`List<Auto> autos`) besitzen, erweitern Sie das
+Datenmodell entsprechend.
+
+. Entfernen Sie die Kommentare in
+`src/main/java/de/hhu/propra/db/data/DatabaseInitializer.java` um die Datenbank
+mit zufällig generierten Benutzern und Autos zu befüllen.
+
+=== Webview
+
+. Erzeugen Sie Webviews für:
+.. Eine Liste aller Kunden samt ihrer Autos, siehe (`/templates/index.html`);
+... Optional: Erzeugen Sie eine Liste aller Kunden und eine Detailansicht einzelner Kunden und deren Autos.
+.. Finden Sie über das `KundeRepository` alle Kunden, die ein Auto einer bestimmten Farbe z.B. blau besitzen und zeigen Sie diese an.
+... Optional: Erzeugen Sie ein Formular zur Eingabe der Farbe und Suchen Sie die Benutzer anhand dieser Eingabe.
+
+=== Dockerfile für die Anwendung
+
+Schreiben Sie ein `Dockerfile` für Spring Boot Anwendung mit dem sich die
+Anwendung in einem Container starten lässt.
+
+Es gibt zwei Alternativen dies Umzusetzen. Zunächst können Sie `./gradlew
+bootRun` im Container starten. Alternativ können Sie dies als
+https://docs.docker.com/develop/develop-images/multistage-build/[multi-stage
+Build] umsetzen, indem Sie zunächst ein `.jar`-File für die Anwendung mit einem
+JDK-Image erzeugen und dieses `.jar` in ein JRE Image kopieren und ausführen.
