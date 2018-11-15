@@ -16,7 +16,7 @@ public class Kunde {
     private String stadt;
     private Integer plz;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Auto> autos;
 
 }
