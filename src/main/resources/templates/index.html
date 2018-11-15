@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -14,11 +14,11 @@
 <table class="table table-striped">
 
     <thead>
-    <tr>
-        <th>Name</th>
-        <th>Stadt</th>
-        <th>PLZ</th>
-        <th>Autos</th>
+    <tr th:each="kunde : ${kunden}">
+        <th th:text="{kunde.name}">Name</th>
+        <th th:text="{kunde.stadt}">Stadt</th>
+        <th th:text="{kunde.plz}">PLZ</th>
+        <th th:text="{kunde.autos}">Autos</th>
     </tr>
     </thead>
     <tbody>
