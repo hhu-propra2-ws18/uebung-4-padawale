@@ -1,32 +1,80 @@
 <!doctype html>
 <html lang="de" xmlns:th="http://www.thymeleaf.com">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kunden</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Kunden</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-<h1>Kunden</h1>
-<table class="table table-striped">
 
-    <thead>
-    <tr th:each="kunde : ${kunden}">
-        <th th:text="${kunde.name}">Name</th>
-        <th th:text="${kunde.stadt}">Stadt</th>
-        <th th:text="${kunde.plz}">PLZ</th>
-        <th th:text="${kunde.autos}">Autos</th>
-    </tr>
-    </thead>
-    <tbody>
-    <p>Ab hier nur noch blaue Autos</p>
-    <tr>
+<div>
+	<h1>Kunden</h1>
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>Name</th>
+			<th>Stadt</th>
+			<th>PLZ</th>
+			<th>Autos</th>
+		</tr>
+		</thead>
+		
+		<tbody>
+		<tr th:each="kunde : ${kunden}">
+			<td th:text="${kunde.name}">Vorwerk & Co. KG</td>
+			<td th:text="${kunde.stadt}">Wuppertal</td>
+			<td th:text="${kunde.plz}">89140</td>
+			<td>
+				<ul th:each="auto : ${kunde.autos}">
+					<li th:text="${auto}">Volkswagen -- schwarz (2000 ccm)</li>
+				</ul>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
 
-    </tr>
-    </tbody>
-</table>
+<div>
+	<h2>Geben Sie eine Farbe ein, nach der Sie filtern möchten:</h2>
+	<form method="post">
+		<input type="text" name="farbe" th:value="${farbe}">
+		<button type="submit">Bestätigen</button>
+	</form>
+</div>
+
+<div th:if="${!(#strings.isEmpty(farbe))}">
+	<h3 th:text="'Autos der Farbe ' + ${farbe} + ':'"></h3>
+	
+	<h4 th:if="${farbigeKunden?.isEmpty()}" th:text="'Keine ' + ${farbe} + 'en Autos vorhanden ;('"></h4>
+	
+	<table class="table table-striped" th:if="${!farbigeKunden.isEmpty()}">
+		<thead>
+		<tr>
+			<th>Name</th>
+			<th>Stadt</th>
+			<th>PLZ</th>
+			<th>Autos</th>
+		</tr>
+		</thead>
+		
+		<tbody>
+		<tr th:each="kunde : ${farbigeKunden}">
+			<td th:text="${kunde.name}">Vorwerk & Co. KG</td>
+			<td th:text="${kunde.stadt}">Wuppertal</td>
+			<td th:text="${kunde.plz}">89140</td>
+			<td>
+				<ul th:each="auto : ${kunde.autos}">
+					<li th:text="${auto}">Volkswagen -- schwarz (2000 ccm)</li>
+				</ul>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
 </body>
 </html>
