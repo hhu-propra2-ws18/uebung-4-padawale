@@ -15,22 +15,16 @@
 
     <thead>
     <tr th:each="kunde : ${kunden}">
-        <th th:text="{kunde.name}">Name</th>
-        <th th:text="{kunde.stadt}">Stadt</th>
-        <th th:text="{kunde.plz}">PLZ</th>
-        <th th:text="{kunde.autos}">Autos</th>
+        <th th:text="${kunde.name}">Name</th>
+        <th th:text="${kunde.stadt}">Stadt</th>
+        <th th:text="${kunde.plz}">PLZ</th>
+        <th th:text="${kunde.autos}">Autos</th>
     </tr>
     </thead>
     <tbody>
+    <p>Ab hier nur noch blaue Autos</p>
     <tr>
-        <td>Vorwerk & Co. KG</td>
-        <td>Wuppertal</td>
-        <td>89140</td>
-        <td>
-            <ul>
-                <li>Volkswagen -- schwarz (2000 ccm)</li>
-            </ul>
-        </td>
+
     </tr>
     </tbody>
 </table>
